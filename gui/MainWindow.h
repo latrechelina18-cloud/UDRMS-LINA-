@@ -18,12 +18,16 @@ public:
                         QString userType,
                         QWidget* parent = nullptr);
 
+signals:
+    void logoutRequested();
+
 private slots:
     void showStudentsPage();
     void showDormsPage();
     void showRoomsPage();
     void showRestaurantPage();
     void setSidebarActive(QPushButton* active);
+    void onLogoutClicked();
 
 private:
     University*     university;
@@ -37,6 +41,7 @@ private:
     QPushButton*    btnDorms;
     QPushButton*    btnRooms;
     QPushButton*    btnRestaurant;
+    QPushButton*    btnLogout;
 
     QTableWidget*   studentsTable;
     QTableWidget*   dormsTable;

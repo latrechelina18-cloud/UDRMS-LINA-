@@ -10,13 +10,31 @@ int main(int argc, char *argv[]) {
     University university("ENSIA");
     DataManager::loadData(university);
 
-    LoginDialog login(&university);
-    if (login.exec() != QDialog::Accepted) return 0;
+    bool keepRunning = true;
 
-    MainWindow window(&university, login.getUserType());
-    window.show();
+    while (keepRunning) {
+        LoginDialog login(&university);
+        if (login.exec() != QDialog::Accepted) {
+            keepRunning = false;
+            break;
+        }
 
-    int result = app.exec();
-    DataManager::saveData(university);
-    return result;
+        MainWindow window(&university, login.getUserType());
+
+        bool loggedOut = false;
+        QObject::connect(&window, &MainWindow::logoutRequested, [&]() {
+            loggedOut = true;
+        });
+
+        window.show();
+        app.exec();
+
+        DataManager::saveData(university);
+
+        if (!loggedOut) {
+            keepRunning = false;
+        }
+    }
+
+    return 0;
 }

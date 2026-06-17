@@ -102,6 +102,26 @@ void MainWindow::setupSidebar() {
     layout->addWidget(btnRestaurant);
     layout->addStretch();
 
+    btnLogout = new QPushButton("  Logout");
+    btnLogout->setStyleSheet(R"(
+        QPushButton {
+            text-align: left;
+            padding: 11px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #F5C6D6;
+            background: rgba(255,255,255,0.08);
+            border: none;
+            font-weight: bold;
+        }
+        QPushButton:hover {
+            background: rgba(255,255,255,0.18);
+            color: white;
+        }
+    )");
+    btnLogout->setCursor(Qt::PointingHandCursor);
+    layout->addWidget(btnLogout);
+
     QLabel* footer = new QLabel("University Dormitory\n& Restaurant System");
     footer->setAlignment(Qt::AlignCenter);
     footer->setWordWrap(true);
@@ -112,6 +132,7 @@ void MainWindow::setupSidebar() {
     connect(btnDorms,      &QPushButton::clicked, this, &MainWindow::showDormsPage);
     connect(btnRooms,      &QPushButton::clicked, this, &MainWindow::showRoomsPage);
     connect(btnRestaurant, &QPushButton::clicked, this, &MainWindow::showRestaurantPage);
+    connect(btnLogout,     &QPushButton::clicked, this, &MainWindow::onLogoutClicked);
 }
 
 QWidget* MainWindow::makeStatCard(QString label, QString value) {
@@ -549,6 +570,16 @@ void MainWindow::showRestaurantPage() {
     contentArea->setCurrentIndex(3);
     refreshRestaurantTable();
     setSidebarActive(btnRestaurant);
+}
+
+void MainWindow::onLogoutClicked() {
+    auto reply = QMessageBox::question(this, "Logout",
+        "Are you sure you want to log out?",
+        QMessageBox::Yes | QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        emit logoutRequested();
+        this->close();
+    }
 }
 
 void MainWindow::applyGlobalStyles() {

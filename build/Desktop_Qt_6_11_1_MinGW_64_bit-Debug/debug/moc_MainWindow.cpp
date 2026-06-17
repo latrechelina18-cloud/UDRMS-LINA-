@@ -40,29 +40,35 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "MainWindow",
-        "showStudentsPage",
+        "logoutRequested",
         "",
+        "showStudentsPage",
         "showDormsPage",
         "showRoomsPage",
         "showRestaurantPage",
         "setSidebarActive",
         "QPushButton*",
-        "active"
+        "active",
+        "onLogoutClicked"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'logoutRequested'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'showStudentsPage'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'showDormsPage'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'showRoomsPage'
+        // Slot 'showDormsPage'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'showRestaurantPage'
+        // Slot 'showRoomsPage'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'showRestaurantPage'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'setSidebarActive'
-        QtMocHelpers::SlotData<void(QPushButton *)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 7, 8 },
+        QtMocHelpers::SlotData<void(QPushButton *)>(7, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
         }}),
+        // Slot 'onLogoutClicked'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -86,18 +92,20 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<MainWindow *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->showStudentsPage(); break;
-        case 1: _t->showDormsPage(); break;
-        case 2: _t->showRoomsPage(); break;
-        case 3: _t->showRestaurantPage(); break;
-        case 4: _t->setSidebarActive((*reinterpret_cast<std::add_pointer_t<QPushButton*>>(_a[1]))); break;
+        case 0: _t->logoutRequested(); break;
+        case 1: _t->showStudentsPage(); break;
+        case 2: _t->showDormsPage(); break;
+        case 3: _t->showRoomsPage(); break;
+        case 4: _t->showRestaurantPage(); break;
+        case 5: _t->setSidebarActive((*reinterpret_cast<std::add_pointer_t<QPushButton*>>(_a[1]))); break;
+        case 6: _t->onLogoutClicked(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 4:
+        case 5:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -105,6 +113,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             }
             break;
         }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (MainWindow::*)()>(_a, &MainWindow::logoutRequested, 0))
+            return;
     }
 }
 
@@ -127,15 +139,21 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainWindow::logoutRequested()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP
