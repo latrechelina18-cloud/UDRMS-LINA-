@@ -11,12 +11,14 @@ release/University.o
 release/DataManager.o
 release/MainWindow.o
 release/LoginDialog.o
+release/SignUpDialog.o
 release/StudentDialog.o
 release/DormDialog.o
 release/RoomDialog.o
 release/RestaurantDialog.o
 release/moc_MainWindow.o
 release/moc_LoginDialog.o
+release/moc_SignUpDialog.o
 release/moc_StudentDialog.o
 release/moc_DormDialog.o
 release/moc_RoomDialog.o

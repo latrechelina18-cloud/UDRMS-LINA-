@@ -11,12 +11,14 @@ debug/University.o
 debug/DataManager.o
 debug/MainWindow.o
 debug/LoginDialog.o
+debug/SignUpDialog.o
 debug/StudentDialog.o
 debug/DormDialog.o
 debug/RoomDialog.o
 debug/RestaurantDialog.o
 debug/moc_MainWindow.o
 debug/moc_LoginDialog.o
+debug/moc_SignUpDialog.o
 debug/moc_StudentDialog.o
 debug/moc_DormDialog.o
 debug/moc_RoomDialog.o

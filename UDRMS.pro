@@ -21,6 +21,7 @@ SOURCES += \
     src/DataManager.cpp \
     gui/MainWindow.cpp \
     gui/LoginDialog.cpp \
+    gui/SignUpDialog.cpp \
     gui/StudentDialog.cpp \
     gui/DormDialog.cpp \
     gui/RoomDialog.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     include/DataManager.h \
     gui/MainWindow.h \
     gui/LoginDialog.h \
+    gui/SignUpDialog.h \
     gui/StudentDialog.h \
     gui/DormDialog.h \
     gui/RoomDialog.h \

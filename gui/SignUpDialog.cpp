@@ -3,7 +3,7 @@
 #include <QHBoxLayout>
 #include <QFormLayout>
 #include <QMessageBox>
-
+#include <QLabel>
 SignUpDialog::SignUpDialog(University* university, QWidget* parent)
     : QDialog(parent), university(university) {
     setWindowTitle("Student Sign Up");
