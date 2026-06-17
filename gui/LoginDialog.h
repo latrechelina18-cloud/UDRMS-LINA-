@@ -6,26 +6,32 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QComboBox>
+#include "University.h"
 
 class LoginDialog : public QDialog {
     Q_OBJECT
 
 public:
-    explicit LoginDialog(QWidget* parent = nullptr);
+    explicit LoginDialog(University* university, QWidget* parent = nullptr);
     QString getEmail() const;
-    QString getPassword() const;
     QString getUserType() const;
+    Student* getLoggedInStudent() const;
 
 private slots:
     void onLoginClicked();
+    void onSignUpClicked();
 
 private:
+    University*  university;
+    Student*     loggedInStudent = nullptr;
+
     QLabel*      titleLabel;
     QLabel*      subtitleLabel;
     QLineEdit*   emailInput;
     QLineEdit*   passwordInput;
     QComboBox*   userTypeCombo;
     QPushButton* loginButton;
+    QPushButton* signUpLink;
     void setupUI();
 };
 
