@@ -5,7 +5,7 @@ CONFIG += c++17
 TARGET = UDRMS
 TEMPLATE = app
 
-INCLUDEPATH += include
+INCLUDEPATH += include gui
 
 SOURCES += \
     src/main.cpp \
