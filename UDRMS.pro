@@ -22,6 +22,7 @@ SOURCES += \
     gui/MainWindow.cpp \
     gui/LoginDialog.cpp \
     gui/SignUpDialog.cpp \
+    gui/AssignRoomDialog.cpp \
     gui/StudentDialog.cpp \
     gui/DormDialog.cpp \
     gui/RoomDialog.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     gui/MainWindow.h \
     gui/LoginDialog.h \
     gui/SignUpDialog.h \
+    gui/AssignRoomDialog.h \
     gui/StudentDialog.h \
     gui/DormDialog.h \
     gui/RoomDialog.h \

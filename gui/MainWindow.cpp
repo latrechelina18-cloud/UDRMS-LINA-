@@ -3,6 +3,7 @@
 #include "DormDialog.h"
 #include "RoomDialog.h"
 #include "RestaurantDialog.h"
+#include "AssignRoomDialog.h"
 #include <QMessageBox>
 #include <QHeaderView>
 #include <QGridLayout>
@@ -44,7 +45,6 @@ void MainWindow::setupSidebar() {
     layout->setContentsMargins(14, 28, 14, 20);
     layout->setSpacing(6);
 
-    // Logo area
     QLabel* appName = new QLabel("UDRMS");
     appName->setAlignment(Qt::AlignCenter);
     appName->setStyleSheet("font-size: 20px; font-weight: bold; color: white;");
@@ -62,7 +62,6 @@ void MainWindow::setupSidebar() {
     userLabel->setWordWrap(true);
     userLabel->setStyleSheet("font-size: 11px; color: #E8A0BF; margin-bottom: 10px;");
 
-    // Nav buttons
     btnStudents   = new QPushButton("  Students");
     btnDorms      = new QPushButton("  Dormitories");
     btnRooms      = new QPushButton("  Rooms");
@@ -144,13 +143,14 @@ void MainWindow::setupStudentsPage() {
     layout->setContentsMargins(28, 28, 28, 28);
     layout->setSpacing(16);
 
-    // Page header
     QHBoxLayout* header = new QHBoxLayout();
     QLabel* title = new QLabel("Students");
     title->setStyleSheet("font-size: 24px; font-weight: bold; color: #3D1A47;");
 
     QPushButton* addBtn = new QPushButton("+ Add Student");
-    addBtn->setStyleSheet(R"(
+    QPushButton* assignBtn = new QPushButton("Assign Room");
+
+    QString filledBtnStyle = R"(
         QPushButton {
             background: #6B2D5E;
             color: white;
@@ -161,14 +161,31 @@ void MainWindow::setupStudentsPage() {
             font-weight: bold;
         }
         QPushButton:hover { background: #8B3D7E; }
-    )");
+    )";
+    QString outlineBtnStyle = R"(
+        QPushButton {
+            background: white;
+            color: #6B2D5E;
+            border: 1.5px solid #6B2D5E;
+            border-radius: 20px;
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+        QPushButton:hover { background: #FDF0F8; }
+    )";
+
+    addBtn->setStyleSheet(filledBtnStyle);
+    assignBtn->setStyleSheet(outlineBtnStyle);
     addBtn->setCursor(Qt::PointingHandCursor);
+    assignBtn->setCursor(Qt::PointingHandCursor);
+
     header->addWidget(title);
     header->addStretch();
+    header->addWidget(assignBtn);
     header->addWidget(addBtn);
     layout->addLayout(header);
 
-    // Stat cards
     QHBoxLayout* stats = new QHBoxLayout();
     stats->setSpacing(12);
     stats->addWidget(makeStatCard("Total Students",
@@ -177,7 +194,6 @@ void MainWindow::setupStudentsPage() {
     stats->addWidget(makeStatCard("Unassigned", "0"));
     layout->addLayout(stats);
 
-    // Table card
     QWidget* tableCard = new QWidget();
     tableCard->setStyleSheet("background: white; border-radius: 14px; border: 1px solid #F0D0E4;");
     QVBoxLayout* tableLayout = new QVBoxLayout(tableCard);
@@ -230,6 +246,11 @@ void MainWindow::setupStudentsPage() {
         if (dlg.exec() == QDialog::Accepted) refreshStudentsTable();
     });
 
+    connect(assignBtn, &QPushButton::clicked, this, [this]() {
+        AssignRoomDialog dlg(university, this);
+        if (dlg.exec() == QDialog::Accepted) refreshStudentsTable();
+    });
+
     contentArea->addWidget(page);
     refreshStudentsTable();
 }
@@ -273,7 +294,20 @@ void MainWindow::setupDormsPage() {
     dormsTable->verticalHeader()->setVisible(false);
     dormsTable->setShowGrid(false);
     dormsTable->setAlternatingRowColors(true);
-    dormsTable->setStyleSheet(studentsTable ? studentsTable->styleSheet() : "");
+    dormsTable->setStyleSheet(R"(
+        QTableWidget {
+            background: white; border: none; border-radius: 14px;
+            font-size: 13px; color: #3D1A47;
+        }
+        QTableWidget::item { padding: 10px 16px; border-bottom: 1px solid #FBF0F8; }
+        QTableWidget::item:selected { background: #F8E8F4; color: #6B2D5E; }
+        QHeaderView::section {
+            background: #FDF0F8; color: #8B4F6F; font-weight: bold;
+            font-size: 12px; padding: 10px 16px; border: none;
+            border-bottom: 1px solid #F0D0E4;
+        }
+        QTableWidget::item:alternate { background: #FEFBFE; }
+    )");
     tl->addWidget(dormsTable);
     layout->addWidget(tableCard);
 
@@ -323,6 +357,20 @@ void MainWindow::setupRoomsPage() {
     roomsTable->verticalHeader()->setVisible(false);
     roomsTable->setShowGrid(false);
     roomsTable->setAlternatingRowColors(true);
+    roomsTable->setStyleSheet(R"(
+        QTableWidget {
+            background: white; border: none; border-radius: 14px;
+            font-size: 13px; color: #3D1A47;
+        }
+        QTableWidget::item { padding: 10px 16px; border-bottom: 1px solid #FBF0F8; }
+        QTableWidget::item:selected { background: #F8E8F4; color: #6B2D5E; }
+        QHeaderView::section {
+            background: #FDF0F8; color: #8B4F6F; font-weight: bold;
+            font-size: 12px; padding: 10px 16px; border: none;
+            border-bottom: 1px solid #F0D0E4;
+        }
+        QTableWidget::item:alternate { background: #FEFBFE; }
+    )");
     tl->addWidget(roomsTable);
     layout->addWidget(tableCard);
 
@@ -371,6 +419,20 @@ void MainWindow::setupRestaurantPage() {
     restaurantTable->verticalHeader()->setVisible(false);
     restaurantTable->setShowGrid(false);
     restaurantTable->setAlternatingRowColors(true);
+    restaurantTable->setStyleSheet(R"(
+        QTableWidget {
+            background: white; border: none; border-radius: 14px;
+            font-size: 13px; color: #3D1A47;
+        }
+        QTableWidget::item { padding: 10px 16px; border-bottom: 1px solid #FBF0F8; }
+        QTableWidget::item:selected { background: #F8E8F4; color: #6B2D5E; }
+        QHeaderView::section {
+            background: #FDF0F8; color: #8B4F6F; font-weight: bold;
+            font-size: 12px; padding: 10px 16px; border: none;
+            border-bottom: 1px solid #F0D0E4;
+        }
+        QTableWidget::item:alternate { background: #FEFBFE; }
+    )");
     tl->addWidget(restaurantTable);
     layout->addWidget(tableCard);
 
