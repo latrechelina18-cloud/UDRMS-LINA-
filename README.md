@@ -23,15 +23,6 @@ A C++ Dormitory & Restaurant Management System built with Qt. Includes student r
 
 ---
 
-## ✅ Dependencies
-
-- Qt 6.x (Qt Creator recommended)
-- C++17 compatible compiler (MinGW / GCC / Clang / MSVC)
-
-Note: Set the Working Directory (Projects → Run Settings) to the project root folder, not the build folder, so `data/` is found correctly.
-
----
-
 ## 🚀 Getting Started
 
 ### Login
