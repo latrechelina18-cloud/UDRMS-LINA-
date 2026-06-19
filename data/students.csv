@@ -1,3 +1,4 @@
 id,fullName,email,password,academicYear,dormitory,room
-1234567,lina,lina@ensia.edu.dz,linalina,1,,
-12345,lina,lina1@ensia.edu.dz,linalina,1,,
+1234567,lina,lina@ensia.edu.dz,linalina,1,dorm1,1
+12345,lina,lina1@ensia.edu.dz,linalina,1,dorm1,1
+12456,roudaina,roudaina@ensia.edu.dz,roudi,2,dorm2,1
